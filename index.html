@@ -3,189 +3,79 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>Chatbox 聊天盒 by Arch1tect</title>
+    <title>聊天盒 (Chatbox) by Arch1tect</title>
   </head>
 
   <body>
+
     <header>
-      <div class="inner">
-        <h1>Chatbox 聊天盒</h1>
-        <h2>A simple and fast chatbox app based on Node.js and Socket.io that features a powerful control panel for admin to use. <br /> 基于 Node.js 与 Socket.io 的简单快速聊天盒程序，易于管理，外观简洁。</h2>
-        <a href="https://github.com/Arch1tect/Chatbox" class="button"><small>View project on</small> GitHub</a>
+      <div class="container">
+        <h1>聊天盒 (Chatbox)</h1>
+        <h2>基于 Node.js 与 Socket.io 的聊天盒应用，外观简洁，易于管理。</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/Arch1tect/Chatbox/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/Arch1tect/Chatbox/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/Arch1tect/Chatbox" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
       </div>
     </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
-<a id="english-description" class="anchor" href="#english-description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>English description</h1>
+    <div class="container">
+      <section id="main_content">
+        <p>该聊天盒基于Node.js与Socket.io，充分利用了HTML5 Websocket双向通讯技术，在方便网站游客高速实时聊天的同时也提供网站管理员强大的控制面板，管理员可对全体游客或者特定游客进行各种操作。</p>
 
-<h2>
-<a id="chatbox" class="anchor" href="#chatbox" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Chatbox</h2>
-
-<p>A simple and fast chatbox app based on Node.js and Socket.io that features a powerful control panel for admin to use.</p>
-
-<h5>
-<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h5>
+<h4>
+<a id="安装并启动聊天盒" class="anchor" href="#%E5%AE%89%E8%A3%85%E5%B9%B6%E5%90%AF%E5%8A%A8%E8%81%8A%E5%A4%A9%E7%9B%92" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>安装并启动聊天盒</h4>
 
 <pre><code>$ cd chatbox
 $ npm install
 $ node index.js
 </code></pre>
 
-<p>And point your browser to <code>http://localhost:4321</code> to go to chatbox page.</p>
+<h4>
+<a id="内嵌聊天盒" class="anchor" href="#%E5%86%85%E5%B5%8C%E8%81%8A%E5%A4%A9%E7%9B%92" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>内嵌聊天盒</h4>
 
-<p>If you want the application to run in the background, just do:</p>
+<p>你只需在你的网页中引入下面的几个文件即可：</p>
 
-<pre><code>$ nohup node index.js &gt; /dev/null &amp;
+<pre><code>&lt;link rel="stylesheet" href="http://你的域名.com:端口/client.css"&gt;
+&lt;script src="https://code.jquery.com/jquery-1.9.0.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.socket.io/socket.io-1.4.5.js"&gt;&lt;/script&gt;
+&lt;script src="http://你的域名.com:端口/client.js"&gt;&lt;/script&gt;
 </code></pre>
-
-<p>Or use tools like <code>forever</code> or <code>pm2</code> to run it. </p>
-
-<p>Admin page is at <code>http://localhost:4321/admin.html</code>, default token is '12345'. </p>
-
-<p>Edit the token in <code>index.js</code> and put the same value in token field in Admin page then you are good to go. </p>
-
-<p>If you want hide the port like <code>localhost</code> (Not <code>localhost:4321</code>) in front page, just change the <code>index.js</code> port to 4321, and setting <code>public/client.js</code> port to 80(or 443).</p>
-
-<p>Quick way to change the port(e.g., change to 2231):</p>
-
-<pre><code>$ sed -i 's/var port =.*/var port = 2231;/g' ./public/client.js
-$ sed -i 's/var port =.*/var port = 2231;/g' ./index.js
-</code></pre>
-
-<p>Quick way to change the token(e.g., change to 54321):</p>
-
-<pre><code>$ sed -i 's/var token =.*/var token = "54321";/g' ./index.js
-</code></pre>
-
-<p>If you are using reverse proxy, setting the <code>using_reverse_proxy</code> to 1 in <code>index.js</code>. In your reverse proxy server, add the real ip address to <code>X-Real-IP</code> header.</p>
-
-<p>To embed this chatbox into a web page, just copy paste the content in public/index.html to the page you want to have chatbox, then change all included css file and JavaScript file path correctly. This app works great with light box library, I recommend using fancybox. </p>
-
-<p>When embedding this chatbox to Wordpress, you can see <a href="/wordpress/README.md">this page</a> to know how to auto-sync the comment author name with chatbox visitor's nickname, so they don't need to enter nickname again.</p>
-
-<p>If you are get error in front page:</p>
-
-<pre><code>failed: Error during WebSocket handshake: Unexpected response code: 400
-</code></pre>
-
-<p>This is almost always due to not using https (SSL). Websocket over plain http is vulnerable to proxies in the middle (often transparent) operating at the http layer breaking the connection.The only way to avoid this is to use SSL all the time - this gives websocket the best chance of working.</p>
-
-<p>More info at <a href="http://tools.ietf.org/html/rfc6455#section-4.2.1">subsection 4.2.1 of the WebSockets RFC 6455</a>.</p>
-
-<h5>
-<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h5>
-
-<p>The chatbox is usually minimized at left bottom by default.
-<a href="http://lifeislikeaboat.com">http://lifeislikeaboat.com</a>. 
-<a href="https://kn007.net/">https://kn007.net/</a></p>
-
-<h5>
-<a id="screenshot" class="anchor" href="#screenshot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshot</h5>
-
-<p><img src="images/Screenshot.png" alt="screenshot" title="Screenshot"></p>
-
-<hr>
-
-<h1>
-<a id="中文介绍" class="anchor" href="#%E4%B8%AD%E6%96%87%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>中文介绍</h1>
-
-<h2>
-<a id="聊天盒" class="anchor" href="#%E8%81%8A%E5%A4%A9%E7%9B%92" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>聊天盒</h2>
-
-<p>该聊天盒基于Node.js与Socket.io，充分利用了HTML5 Websocket双向通讯技术，在方便网站游客高速实时聊天的同时也提供网站管理员强大的控制面板，管理员可对全体游客或者特定游客进行各种操作。</p>
-
-<h5>
-<a id="如何使用" class="anchor" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>如何使用</h5>
-
-<pre><code>$ cd chatbox
-$ npm install
-$ node index.js
-</code></pre>
-
-<p>在本地安装则直接访问<code>http://localhost:4321</code>即可进入聊天盒。</p>
-
-<p>如果你想让聊天盒在后台运行，可以用下面语句启动聊天盒：</p>
-
-<pre><code>$ nohup node index.js &gt; /dev/null &amp;
-</code></pre>
-
-<p>也可以使用<code>forever</code>或<code>pm2</code>工具来运行。</p>
-
-<p>控制台的访问地址为<code>http://localhost:4321/admin.html</code>， 默认的密码为“12345”。</p>
-
-<p>您可以通过修改index.js文件里的Token值来改掉默认的管理员密码。</p>
-
-<p>如果你想让访问的地址隐藏端口号（如localhost，而非源代码中默认的localhost:4321），请修改<code>index.js</code>文件中的端口号为服务器后端的监听端口（如4321），其次修改<code>public/client.js</code>的端口为80（或443）即可。</p>
-
-<p>通过Shell快速修改端口（比如改成2231）：</p>
-
-<pre><code>$ sed -i 's/var port =.*/var port = 2231;/g' ./public/client.js
-$ sed -i 's/var port =.*/var port = 2231;/g' ./index.js
-</code></pre>
-
-<p>同理，可以快速修改管理员密码（比如改成54321）：</p>
-
-<pre><code>$ sed -i 's/var token =.*/var token = "54321";/g' ./index.js
-</code></pre>
-
-<p>如果你使用反向代理，请将<code>index.js</code>的<code>using_reverse_proxy</code>值修改为1，并在反向代理服务器添加X-Real-IP 头指向源IP。</p>
-
-<p>如果想把聊天盒嵌入网站中，只要将<code>public/index.html</code>文件的内容复制粘贴到想要显示聊天盒的网页里，同时<code>public/index.html</code>中所有引入css和JavaScript文件地址需要修改正确。推荐配合fancybox插件使用来放大聊天盒里的图片。</p>
-
-<p>嵌入Wordpress后，同步评论者用户名，可参照<a href="/wordpress/README.md">此说明</a> 。</p>
-
-<p>如果你在调试时出现：</p>
-
-<pre><code>failed: Error during WebSocket handshake: Unexpected response code: 400
-</code></pre>
-
-<p>比较大的可能是在前端隐藏了端口并使用了http，具体可以看下面传送门的解释。简单来说Websocket通信在使用80端口转发时，80端口只负责连接，握手及通信在反代转发到后端端口通讯时可能会出错（在HTTP层被断开）。使用https可以避免这个问题，握手通讯皆用443端口。如果你不想使用https，那么建议你通过使用<code>http://localhost:4321</code>的方式来使用，而不隐藏端口；或是直接让nodejs监听80端口，而不通过反代。</p>
-
-<p>更多资料可以参照WebSockets RFC 6455协议中的4.2.1章，<a href="http://tools.ietf.org/html/rfc6455#section-4.2.1">传送门</a>。</p>
 
 <h5>
 <a id="示例" class="anchor" href="#%E7%A4%BA%E4%BE%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>示例</h5>
 
-<p>聊天盒一般默认最小化于网页左下角
-<a href="http://lifeislikeaboat.com">http://lifeislikeaboat.com</a> 
-<a href="https://kn007.net/">https://kn007.net/</a></p>
+<p>聊天盒一般默认最小化于网页左下角</p>
+
+<p><a href="http://lifeislikeaboat.com">http://lifeislikeaboat.com</a> </p>
+
+<p><a href="https://kn007.net/">https://kn007.net/</a></p>
+
+<h5>
+<a id="试用" class="anchor" href="#%E8%AF%95%E7%94%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>试用</h5>
+
+<p>无需安装，直接复制粘贴下面代码即可：</p>
+
+<pre><code>&lt;link rel="stylesheet" href="http://lifeislikeaboat.com:2007/client.css"&gt;
+&lt;script src="https://code.jquery.com/jquery-1.9.0.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.socket.io/socket.io-1.4.5.js"&gt;&lt;/script&gt;
+&lt;script src="http://lifeislikeaboat.com:2007/client.js"&gt;&lt;/script&gt;
+</code></pre>
 
 <h5>
 <a id="截图" class="anchor" href="#%E6%88%AA%E5%9B%BE" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>截图</h5>
 
-<p><img src="images/Screenshot.png" alt="screenshot" title="Screenshot"></p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/Arch1tect/Chatbox/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/Arch1tect/Chatbox/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/Arch1tect/Chatbox"></a> is maintained by <a href="https://github.com/Arch1tect">Arch1tect</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+<p><img src="/screenshots/Screenshot.png?raw=true" alt="screenshot" title="Screenshot"></p>
+      </section>
     </div>
 
-  
+    
   </body>
 </html>
